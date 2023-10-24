@@ -1,21 +1,25 @@
-import { useState } from 'react';
+import { ChangeEvent, useRef, useState } from "react";
 
 export const CountRenders = () => {
-	const [value, setValue] = useState('');
-	const count = 1;
+  const [value, setValue] = useState("");
 
-	return (
-		<>
-			<h2>useRef</h2>
+  const countRef = useRef<number>(1);
 
-			<input
-				value={value}
-				type='text'
-				onChange={(e) => setValue(e.target.value)}
-			/>
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+    countRef.current += 1;
+  };
 
-			<p>{value}</p>
-			<p>I have rendered {count} times</p>
-		</>
-	);
+  const count = countRef.current;
+
+  return (
+    <>
+      <h2>useRef</h2>
+
+      <input value={value} type="text" onChange={(e) => handleChange(e)} />
+
+      <p>{value}</p>
+      <p>I have rendered {count} times</p>
+    </>
+  );
 };
