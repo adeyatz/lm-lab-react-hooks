@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useRef } from "react";
 import { AddTask } from "./add_task.js";
 import { TaskList } from "./task_list.js";
 
@@ -47,19 +47,20 @@ function taskReducer(tasks: Task[], action: TaskAction) {
       });
 
     default:
-      throw Error(`Unknown Action: ${action.type}`);
+      throw Error(`Unknown Action: ${action}`);
   }
 }
 
 export function TaskApp() {
   const [tasks, dispatch] = useReducer(taskReducer, initialTasks);
+  const taskKey = useRef<number>(initialTasks.length);
 
   function handleAddTask(taskText: string) {
-    console.log(`Adding ${myNextId}`);
+    console.log(`Adding ${taskKey.current}`);
     dispatch({
       type: "add",
       text: taskText,
-      id: myNextId++,
+      id: taskKey.current++,
     });
   }
 
