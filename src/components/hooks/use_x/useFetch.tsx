@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { isError } from "../../../helpers/is_error";
 
-export function useFetch<T>(url: string): [T | null, boolean] {
+//[T | null, boolean]
+export function useFetch<T>(url: string): {
+  dataObj: T | undefined;
+  fetchingState: boolean;
+} {
   const [data, setData] = useState<T>();
   const [isFetching, setIsFetching] = useState(true);
 
@@ -23,7 +27,10 @@ export function useFetch<T>(url: string): [T | null, boolean] {
     fetchData();
   }, [url]);
 
-  return data ? [data, isFetching] : [null, isFetching];
+  return { dataObj: data, fetchingState: isFetching };
+  //  return data ? {dataObj : data, fetchingState : isFetching} : {dataObj : null, fetchingState : isFetching};
+
+  //  return data ? [data, isFetching] : [null, isFetching];
 }
 
 export default useFetch;

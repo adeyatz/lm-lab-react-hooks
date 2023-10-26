@@ -1,4 +1,5 @@
 import useFetch from "./useFetch";
+import { getSummat } from "./scratch";
 
 /** This is the response that TypiCode gives for the /todos/ endpoint */
 interface TodoResponse {
@@ -26,10 +27,26 @@ export const Todo = () => {
     <>
       <h2>Custom Hook</h2>
 
-      {fetchResult0[1] ? <p>Fetching...</p> : <p>{fetchResult0[0]?.title}</p>}
-      {fetchResult1[1] ? <p>Fetching...</p> : <p>{fetchResult1[0]?.title}</p>}
-      {fetchResult2[1] ? <p>Fetching...</p> : <p>{fetchResult2[0]?.title}</p>}
-      {fetchResult3[1] ? <p>Fetching...</p> : <p>{fetchResult3[0]?.title}</p>}
+      {fetchResult0.fetchingState ? (
+        <p>Fetching...</p>
+      ) : (
+        <p>{fetchResult0.dataObj?.title}</p>
+      )}
+      {fetchResult1.fetchingState ? (
+        <p>Fetching...</p>
+      ) : (
+        <p>{fetchResult1.dataObj?.title}</p>
+      )}
+      {fetchResult2.fetchingState ? (
+        <p>Fetching...</p>
+      ) : (
+        <p>{fetchResult2.dataObj?.title}</p>
+      )}
+      {fetchResult3.fetchingState ? (
+        <p>Fetching...</p>
+      ) : (
+        <p>{fetchResult3.dataObj?.title}</p>
+      )}
     </>
   );
 };
