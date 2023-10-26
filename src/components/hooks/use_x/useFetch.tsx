@@ -28,8 +28,6 @@ export function useFetch<T>(url: string): {
   }, [url]);
 
   return { dataObj: data, fetchingState: isFetching };
-  //  return data ? {dataObj : data, fetchingState : isFetching} : {dataObj : null, fetchingState : isFetching};
-
   //  return data ? [data, isFetching] : [null, isFetching];
 }
 
